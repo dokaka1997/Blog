@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "7004c7c2-782d-4b90-a3a2-31aff4ef0919",
+		"name": "Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"testxx\",\r\n    \"password\": \"123456\",\r\n    \"name\": \"aaa\",\r\n    \"dob\": \"2022-02-02\",\r\n    \"email\": \"abcd@gmail.com\",\r\n    \"phone\": \"099999999\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"testxx\",\r\n    \"password\" : \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0eHgiLCJleHAiOjE2NTI4MDU0NDAsImlhdCI6MTY1MjgwMTg0MH0.uiLFZOLsXyITZrf7Cwpk0MT_WVy9IOBOljFuNrS7R6Dth_yaXSM9WQnyVg5suHnqJHIJhM4ugy3lTAtkXj7Aww",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryName\" : \"hghsg\",\r\n    \"icon\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0eHgiLCJleHAiOjE2NTI4MDU0NDAsImlhdCI6MTY1MjgwMTg0MH0.uiLFZOLsXyITZrf7Cwpk0MT_WVy9IOBOljFuNrS7R6Dth_yaXSM9WQnyVg5suHnqJHIJhM4ugy3lTAtkXj7Aww",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0eHgiLCJleHAiOjE2NTI4MDU0NDAsImlhdCI6MTY1MjgwMTg0MH0.uiLFZOLsXyITZrf7Cwpk0MT_WVy9IOBOljFuNrS7R6Dth_yaXSM9WQnyVg5suHnqJHIJhM4ugy3lTAtkXj7Aww",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/category/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Blog",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0eHgiLCJleHAiOjE2NTI4MDYzNjksImlhdCI6MTY1MjgwMjc2OX0.RlbPpqmyd6In_QmU5G4iKuQ70rhW99176VDQ8kXSu38tgM9xPSb1KUuxo_pnuEVGEifZnpbS02k0KsJ7ESkHlg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"author\" : 1,\r\n    \"content\" : \"xxxx\",\r\n    \"title\" : \"3232\",\r\n    \"category\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/blog",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Blog",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0eHgiLCJleHAiOjE2NTI4MDYzNjksImlhdCI6MTY1MjgwMjc2OX0.RlbPpqmyd6In_QmU5G4iKuQ70rhW99176VDQ8kXSu38tgM9xPSb1KUuxo_pnuEVGEifZnpbS02k0KsJ7ESkHlg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blog?pageIndex=0&pageSize=1&search=xxx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "1"
+						},
+						{
+							"key": "search",
+							"value": "xxx"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Blog By Category",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0eHgiLCJleHAiOjE2NTI4MDYzNjksImlhdCI6MTY1MjgwMjc2OX0.RlbPpqmyd6In_QmU5G4iKuQ70rhW99176VDQ8kXSu38tgM9xPSb1KUuxo_pnuEVGEifZnpbS02k0KsJ7ESkHlg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blog/category?pageIndex=0&pageSize=5&category=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog",
+						"category"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						},
+						{
+							"key": "category",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Blog By Author",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0eHgiLCJleHAiOjE2NTI4MDYzNjksImlhdCI6MTY1MjgwMjc2OX0.RlbPpqmyd6In_QmU5G4iKuQ70rhW99176VDQ8kXSu38tgM9xPSb1KUuxo_pnuEVGEifZnpbS02k0KsJ7ESkHlg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/blog/author?pageIndex=0&pageSize=5&author=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"blog",
+						"author"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						},
+						{
+							"key": "author",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
