@@ -8,9 +8,6 @@ public interface BlogService {
 
     BlogEntity addNewBlog(BlogEntity blogEntity);
 
-    List<BlogEntity> getAllBlog(int pageIndex, int pageSize, String search);
+    List<BlogEntity> getAllBlog(int pageIndex, int pageSize, String search, Long author, Long category);
 
-    List<BlogEntity> getAllBlogByAuthorId(int pageIndex, int pageSize, Long id);
-
-    List<BlogEntity> getAllBlogByCategory(int pageIndex, int pageSize, Long categoryId);
 }

@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
     public boolean createUser(CreateUserRequest userRequest) {
         ModelMapper mapper = new ModelMapper();
         UserEntity userEntity = mapper.map(userRequest, UserEntity.class);
+        userEntity.setRole(0L);
         if (userRepository.getByUsername(userRequest.getUsername()).isPresent()) {
             throw new RuntimeException("Username existed");
         }

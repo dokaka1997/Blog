@@ -26,18 +26,11 @@ public class BlogController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BlogEntity>> getAllBlog(@RequestParam int pageIndex, @RequestParam int pageSize, @RequestParam String search) {
-        return ResponseEntity.ok(blogService.getAllBlog(pageIndex, pageSize, search));
-    }
-
-    @GetMapping("/author")
-    public ResponseEntity<List<BlogEntity>> getAllBlogByAuthor(@RequestParam int pageIndex, @RequestParam int pageSize, @RequestParam Long author) {
-        return ResponseEntity.ok(blogService.getAllBlogByAuthorId(pageIndex, pageSize, author));
-    }
-
-    @GetMapping("/category")
-    public ResponseEntity<List<BlogEntity>> getAllBlogByCategory(@RequestParam int pageIndex, @RequestParam int pageSize, @RequestParam Long category) {
-        return ResponseEntity.ok(blogService.getAllBlogByCategory(pageIndex, pageSize, category));
+    public ResponseEntity<List<BlogEntity>> getAllBlog(@RequestParam int pageIndex, @RequestParam int pageSize,
+                                                       @RequestParam(required = false, defaultValue = "") String search,
+                                                       @RequestParam(required = false) Long author,
+                                                       @RequestParam(required = false) Long category) {
+        return ResponseEntity.ok(blogService.getAllBlog(pageIndex, pageSize, search, author, category));
     }
 
 }

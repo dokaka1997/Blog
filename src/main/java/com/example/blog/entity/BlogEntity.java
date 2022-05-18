@@ -24,4 +24,6 @@ public class BlogEntity {
     private String title;
 
     private Long category;
+
+    private Long imageId;
 }

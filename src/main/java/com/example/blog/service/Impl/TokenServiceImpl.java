@@ -1,7 +1,6 @@
 package com.example.blog.service.Impl;
 
 
-
 import com.example.blog.config.JwtTokenUtil;
 import com.example.blog.entity.UserEntity;
 import com.example.blog.model.request.JwtRequest;
@@ -59,6 +58,7 @@ public class TokenServiceImpl implements TokenService {
             accountDTO.setDob(account.getDob());
             accountDTO.setEmail(account.getEmail());
             accountDTO.setPhone(account.getPhone());
+            accountDTO.setRole(account.getRole());
             return new JwtResponse(token, accountDTO);
         } else {
             throw new RuntimeException("Username or password incorrect");
