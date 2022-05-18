@@ -1,22 +1,37 @@
 package com.example.blog.service.Impl;
 
 import com.example.blog.entity.BlogEntity;
+import com.example.blog.entity.CategoryEntity;
+import com.example.blog.entity.UserEntity;
+import com.example.blog.model.response.BlogDTO;
 import com.example.blog.repository.BlogRepository;
+import com.example.blog.repository.CategoryRepository;
+import com.example.blog.repository.UserRepository;
 import com.example.blog.service.BlogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class BlogServiceImpl implements BlogService {
     BlogRepository blogRepository;
 
-    public BlogServiceImpl(BlogRepository blogRepository) {
+    UserRepository userRepository;
+
+    CategoryRepository categoryRepository;
+
+    @Autowired
+    public BlogServiceImpl(BlogRepository blogRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
         this.blogRepository = blogRepository;
+        this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
     }
+
 
     @Override
     public BlogEntity addNewBlog(BlogEntity blogEntity) {
@@ -29,7 +44,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<BlogEntity> getAllBlog(int pageIndex, int pageSize, String search, Long author, Long category) {
+    public List<BlogDTO> getAllBlog(int pageIndex, int pageSize, String search, Long author, Long category) {
         List<BlogEntity> rs = new ArrayList<>();
 
         List<BlogEntity> blogEntities = blogRepository.findAll();
@@ -67,7 +82,57 @@ public class BlogServiceImpl implements BlogService {
                 }
             }
         }
-        return finalRs;
+        List<BlogDTO> blogDTOS = new ArrayList<>();
+        for (BlogEntity entity : finalRs) {
+            BlogDTO dto = new BlogDTO();
+            dto.setId(entity.getId());
+            dto.setCreateDate(entity.getCreateDate());
+            dto.setUpdatedDate(entity.getUpdatedDate());
+            if (entity.getAuthor() != null) {
+                dto.setAuthor(entity.getAuthor());
+                Optional<UserEntity> optionalUser = userRepository.findById(entity.getAuthor());
+                optionalUser.ifPresent(userEntity -> dto.setAuthorName(userEntity.getName()));
+            }
+
+            if (entity.getCategory() != null) {
+                dto.setCategory(entity.getCategory());
+                Optional<CategoryEntity> optionalCategory = categoryRepository.findById(entity.getCategory());
+                optionalCategory.ifPresent(categoryEntity -> dto.setCategoryName(categoryEntity.getCategoryName()));
+            }
+            dto.setImageId(entity.getImageId());
+            dto.setTitle(entity.getTitle());
+            dto.setContent(entity.getContent());
+            blogDTOS.add(dto);
+        }
+
+        return blogDTOS;
+    }
+
+    @Override
+    public BlogDTO getBlogById(Long id) {
+        BlogDTO dto = new BlogDTO();
+        Optional<BlogEntity> optionalBlog = blogRepository.findById(id);
+        if (optionalBlog.isPresent()) {
+            BlogEntity entity = optionalBlog.get();
+            dto.setId(entity.getId());
+            dto.setCreateDate(entity.getCreateDate());
+            dto.setUpdatedDate(entity.getUpdatedDate());
+            if (entity.getAuthor() != null) {
+                dto.setAuthor(entity.getAuthor());
+                Optional<UserEntity> optionalUser = userRepository.findById(entity.getAuthor());
+                optionalUser.ifPresent(userEntity -> dto.setAuthorName(userEntity.getName()));
+            }
+
+            if (entity.getCategory() != null) {
+                dto.setCategory(entity.getCategory());
+                Optional<CategoryEntity> optionalCategory = categoryRepository.findById(entity.getCategory());
+                optionalCategory.ifPresent(categoryEntity -> dto.setCategoryName(categoryEntity.getCategoryName()));
+            }
+            dto.setImageId(entity.getImageId());
+            dto.setTitle(entity.getTitle());
+            dto.setContent(entity.getContent());
+        }
+        return dto;
     }
 
 }

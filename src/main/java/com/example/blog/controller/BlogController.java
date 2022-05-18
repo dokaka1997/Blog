@@ -1,6 +1,7 @@
 package com.example.blog.controller;
 
 import com.example.blog.entity.BlogEntity;
+import com.example.blog.model.response.BlogDTO;
 import com.example.blog.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +27,16 @@ public class BlogController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BlogEntity>> getAllBlog(@RequestParam int pageIndex, @RequestParam int pageSize,
+    public ResponseEntity<List<BlogDTO>> getAllBlog(@RequestParam int pageIndex, @RequestParam int pageSize,
                                                        @RequestParam(required = false, defaultValue = "") String search,
                                                        @RequestParam(required = false) Long author,
                                                        @RequestParam(required = false) Long category) {
         return ResponseEntity.ok(blogService.getAllBlog(pageIndex, pageSize, search, author, category));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BlogDTO> getBlogById(@PathVariable Long id) {
+        return ResponseEntity.ok(blogService.getBlogById(id));
     }
 
 }
