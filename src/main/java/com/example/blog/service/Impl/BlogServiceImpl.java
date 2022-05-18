@@ -46,16 +46,24 @@ public class BlogServiceImpl implements BlogService {
         List<BlogEntity> finalRs = new ArrayList<>();
         int start = pageIndex * pageSize;
         for (int i = 0; i < rs.size(); i++) {
+            boolean isAdd = false;
             if (i >= start && i < start + pageSize) {
                 if (i > start + pageSize) {
                     break;
                 }
-                if (author != null && Objects.equals(rs.get(i).getAuthor(), author)) {
+                if (author == null && category == null) {
                     finalRs.add(blogEntities.get(i));
-                } else {
-                    if (category != null && Objects.equals(rs.get(i).getCategory(), category)) {
-                        finalRs.add(blogEntities.get(i));
-                    }
+                    continue;
+                }
+                if (author != null && Objects.equals(rs.get(i).getAuthor(), author)) {
+                    isAdd = true;
+                }
+                if (category != null && !Objects.equals(rs.get(i).getCategory(), category)) {
+                    isAdd = false;
+                }
+
+                if (isAdd) {
+                    finalRs.add(blogEntities.get(i));
                 }
             }
         }
