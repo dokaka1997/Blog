@@ -28,9 +28,9 @@ public class BlogController {
 
     @GetMapping
     public ResponseEntity<List<BlogDTO>> getAllBlog(@RequestParam int pageIndex, @RequestParam int pageSize,
-                                                       @RequestParam(required = false, defaultValue = "") String search,
-                                                       @RequestParam(required = false) Long author,
-                                                       @RequestParam(required = false) Long category) {
+                                                    @RequestParam(required = false, defaultValue = "") String search,
+                                                    @RequestParam(required = false) Long author,
+                                                    @RequestParam(required = false) Long category) {
         return ResponseEntity.ok(blogService.getAllBlog(pageIndex, pageSize, search, author, category));
     }
 
@@ -39,4 +39,8 @@ public class BlogController {
         return ResponseEntity.ok(blogService.getBlogById(id));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteBlogById(@PathVariable Long id) {
+        return ResponseEntity.ok(blogService.deleteById(id));
+    }
 }

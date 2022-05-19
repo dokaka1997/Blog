@@ -76,6 +76,9 @@ public class BlogServiceImpl implements BlogService {
                 if (category != null && !Objects.equals(rs.get(i).getCategory(), category)) {
                     isAdd = false;
                 }
+                if (category != null && Objects.equals(rs.get(i).getCategory(), category)) {
+                    isAdd = true;
+                }
 
                 if (isAdd) {
                     finalRs.add(blogEntities.get(i));
@@ -133,6 +136,16 @@ public class BlogServiceImpl implements BlogService {
             dto.setContent(entity.getContent());
         }
         return dto;
+    }
+
+    @Override
+    public Boolean deleteById(Long id) {
+        try {
+            blogRepository.deleteById(id);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
 }

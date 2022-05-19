@@ -13,4 +13,6 @@ public interface BlogService {
 
     BlogDTO getBlogById(Long id);
 
+    Boolean deleteById(Long id);
+
 }
