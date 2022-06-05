@@ -1,8 +1,10 @@
 package com.example.blog.controller;
 
 
+import com.example.blog.entity.UserEntity;
 import com.example.blog.model.request.CreateUserRequest;
 import com.example.blog.model.request.JwtRequest;
+import com.example.blog.model.request.UpdateUserRequest;
 import com.example.blog.service.TokenService;
 import com.example.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +35,10 @@ public class UserController {
     public ResponseEntity<Boolean> createUser(@RequestBody CreateUserRequest userRequest) {
         return ResponseEntity.ok(userService.createUser(userRequest));
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<UserEntity> createUser(@RequestBody UpdateUserRequest updateUserRequest) {
+        return ResponseEntity.ok(userService.updateUser(updateUserRequest));
+    }
+
 }

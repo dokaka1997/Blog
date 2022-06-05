@@ -4,6 +4,7 @@ package com.example.blog.service.Impl;
 import com.example.blog.entity.UserEntity;
 import com.example.blog.model.request.CreateUserRequest;
 import com.example.blog.model.request.LoginUserRequest;
+import com.example.blog.model.request.UpdateUserRequest;
 import com.example.blog.repository.UserRepository;
 import com.example.blog.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -43,5 +44,20 @@ public class UserServiceImpl implements UserService {
     public UserEntity login(LoginUserRequest loginUserRequest) {
         Optional<UserEntity> userEntity = userRepository.getByUsernameAndPassword(loginUserRequest.getUsername(), loginUserRequest.getPassword());
         return userEntity.orElse(null);
+    }
+
+    @Override
+    public UserEntity updateUser(UpdateUserRequest updateUserRequest) {
+        Optional<UserEntity> optionalUser = userRepository.findById(updateUserRequest.getId());
+        UserEntity userEntity = new UserEntity();
+        if (optionalUser.isPresent()) {
+            userEntity = optionalUser.get();
+            userEntity.setEmail(updateUserRequest.getEmail());
+            userEntity.setDob(updateUserRequest.getDob());
+            userEntity.setPhone(updateUserRequest.getPhone());
+            userEntity.setName(updateUserRequest.getName());
+            userRepository.save(userEntity);
+        }
+        return userEntity;
     }
 }
