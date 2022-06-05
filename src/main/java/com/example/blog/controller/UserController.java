@@ -2,6 +2,7 @@ package com.example.blog.controller;
 
 
 import com.example.blog.entity.UserEntity;
+import com.example.blog.model.request.ChangePassRequest;
 import com.example.blog.model.request.CreateUserRequest;
 import com.example.blog.model.request.JwtRequest;
 import com.example.blog.model.request.UpdateUserRequest;
@@ -39,6 +40,11 @@ public class UserController {
     @PutMapping("/update")
     public ResponseEntity<UserEntity> createUser(@RequestBody UpdateUserRequest updateUserRequest) {
         return ResponseEntity.ok(userService.updateUser(updateUserRequest));
+    }
+
+    @PutMapping("/change_pass")
+    public ResponseEntity<UserEntity> changePass(@RequestBody ChangePassRequest changePassRequest) {
+        return ResponseEntity.ok(userService.changePass(changePassRequest));
     }
 
 }

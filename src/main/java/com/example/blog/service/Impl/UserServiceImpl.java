@@ -2,6 +2,7 @@ package com.example.blog.service.Impl;
 
 
 import com.example.blog.entity.UserEntity;
+import com.example.blog.model.request.ChangePassRequest;
 import com.example.blog.model.request.CreateUserRequest;
 import com.example.blog.model.request.LoginUserRequest;
 import com.example.blog.model.request.UpdateUserRequest;
@@ -56,6 +57,21 @@ public class UserServiceImpl implements UserService {
             userEntity.setDob(updateUserRequest.getDob());
             userEntity.setPhone(updateUserRequest.getPhone());
             userEntity.setName(updateUserRequest.getName());
+            userRepository.save(userEntity);
+        }
+        return userEntity;
+    }
+
+    @Override
+    public UserEntity changePass(ChangePassRequest changePassRequest) {
+        Optional<UserEntity> optionalUser = userRepository.findById(changePassRequest.getId());
+        UserEntity userEntity = new UserEntity();
+        if (optionalUser.isPresent()) {
+            userEntity = optionalUser.get();
+            if (!changePassRequest.getOldPassword().equals(userEntity.getPassword())) {
+                throw new RuntimeException("Old password incorrect!!!");
+            }
+            userEntity.setPassword(changePassRequest.getNewPassword());
             userRepository.save(userEntity);
         }
         return userEntity;
